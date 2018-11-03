@@ -1,3 +1,4 @@
+//This function will extract the substring after the specified "argument_type"
 import Strings.something
 
 extract_after(text, argument_type){
