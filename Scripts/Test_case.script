@@ -1,4 +1,4 @@
-//Script to check that the results of a basic mathematical calculus with the * operator gives the right result
+//Script to check that the results of a basic mathematical calculus with the '% of' operator gives the right result
 
 //Creation of a Chrome instance:
 my_bro = Browser("Chrome")
@@ -10,7 +10,7 @@ my_bro.Goto("www.google.com")
 my_query = my_bro.SearchItem("lst-ib")
 
 //Get the text to submit
-query = "2011*2018"
+query = "2011% of2018"
 
 //Calculation of the query
 number = calculate(query)
@@ -26,7 +26,7 @@ check = (result == number)
 
 //Display of the result
 If check then 
-  display("Google is a good multiplicator") 
+  display("Google is a good percentager") 
 else 
-  display("Google can't even do a multiplication...")
+  display("Google can't even do a percentage...")
 end if
