@@ -1,4 +1,4 @@
-//Script to make a query on google and check that the resulting page has 10 items
+//Script to check that the results of a search with "site:" in the query are on the right host
 
 //Creation of a Chrome instance:
 my_bro = Browser("Chrome")
@@ -9,17 +9,23 @@ my_bro.Goto("www.google.com")
 //Find the query field
 my_query = my_bro.SearchItem("lst-ib")
 
+//Get the text to submit
+query = "javascript site: openclassrooms.com"
+
+//Extract the argument in the query
+site = extract_after(query, "site: ")
+
 //Submit a query
-my_query.Submit("What is SEO ?")
+my_query.Submit(query)
 
 //Get the list of results
 results = my_bro.SearchTheItems("LC201b")
 
-//Check will contain a boolean validating the 10 results
-check = (results.length == 10)
+//Checking if all the items in the list contain the "site"
+check = find_in_list(site, results)
 
-//A little popup to tell the result:
+//Display of the result
 If check then 
-  display("10 results found") 
+  display("All results are in " + site) 
 else 
-  display("Only " + results.length + " results found!")
+  display("There are some results that are not in " + site + "!")
