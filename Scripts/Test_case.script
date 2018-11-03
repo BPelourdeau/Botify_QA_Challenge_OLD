@@ -1,4 +1,4 @@
-//Script to check that the results of a search with "filetype:" in the query have the right extension
+//Script to check that the results of a search with "inurl:" in the query have a url that contains the query
 
 //Creation of a Chrome instance:
 my_bro = Browser("Chrome")
@@ -10,29 +10,23 @@ my_bro.Goto("www.google.com")
 my_query = my_bro.SearchItem("lst-ib")
 
 //Get the text to submit
-query = "javascript tuto filetype: pdf"
+query = "inurl: gouv.fr"
 
 //Extract the argument in the query
-filetype = extract_after(query, "filetype: ")
-filetype = uppercase(filetype)
+content = extract_after(query, "inurl: ")
 
 //Submit a query
 my_query.Submit(query)
 
-//Get the list of results but only the part that display the type of file
-results = my_bro.SearchTheItems("sFZIhb b w xsm")
+//Get the list of url results
+results = my_bro.SearchTheItems("iUh30")
 
-//First check to see if all the results have an extension noted
-check = (results.length == 10)
-
-//Then check that all the extensions are ok
-if check then
-  check = find_in_list(filetype, results)
-end if
+//Check that all the results have the argument "content" in their url
+check = find_in_list(content, results)
 
 //Display of the result
 If check then 
-  display("All results have the right file extension") 
+  display("All results have " + content + " in their url") 
 else 
-  display("Some of the results don't have the right file extension !")
+  display("Some results don't have " + content + " in their url")
 end if
