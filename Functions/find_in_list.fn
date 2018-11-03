@@ -1,0 +1,10 @@
+//This function will return true if word is in every item of list
+import Strings.something
+
+find_in_list(word, list){
+  check = true
+  for i = 1 to list.length
+    if not found(list[i-1], word) then check = false
+  end for
+  return check
+}
