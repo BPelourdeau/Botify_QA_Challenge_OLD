@@ -1,4 +1,4 @@
-//Script to check that the results of a search with "site:" in the query are on the right host
+//Script to check that the results of a search with "filetype:" in the query have the right extension
 
 //Creation of a Chrome instance:
 my_bro = Browser("Chrome")
@@ -10,22 +10,29 @@ my_bro.Goto("www.google.com")
 my_query = my_bro.SearchItem("lst-ib")
 
 //Get the text to submit
-query = "javascript site: openclassrooms.com"
+query = "javascript tuto filetype: pdf"
 
 //Extract the argument in the query
-site = extract_after(query, "site: ")
+filetype = extract_after(query, "filetype: ")
+filetype = uppercase(filetype)
 
 //Submit a query
 my_query.Submit(query)
 
-//Get the list of results
-results = my_bro.SearchTheItems("LC201b")
+//Get the list of results but only the part that display the type of file
+results = my_bro.SearchTheItems("sFZIhb b w xsm")
 
-//Checking if all the items in the list contain the "site"
-check = find_in_list(site, results)
+//First check to see if all the results have an extension noted
+check = (results.length == 10)
+
+//Then check that all the extensions are ok
+if check then
+  check = find_in_list(filetype, results)
+end if
 
 //Display of the result
 If check then 
-  display("All results are in " + site) 
+  display("All results have the right file extension") 
 else 
-  display("There are some results that are not in " + site + "!")
+  display("Some of the results don't have the right file extension !")
+end if
