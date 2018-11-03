@@ -1,0 +1,6 @@
+import Strings.something
+
+extract_after(text, argument_type){
+  argument = strip(substring(text, findlast(text, argument_type), text.length))
+  return argument
+}
