@@ -1,4 +1,4 @@
-//Script to check that the results of a search with "inurl:" in the query have a url that contains the query
+//Script to check that the results of a basic mathematical calculus with the + operator gives the right result
 
 //Creation of a Chrome instance:
 my_bro = Browser("Chrome")
@@ -10,23 +10,23 @@ my_bro.Goto("www.google.com")
 my_query = my_bro.SearchItem("lst-ib")
 
 //Get the text to submit
-query = "inurl: gouv.fr"
+query = "2011+2018"
 
-//Extract the argument in the query
-content = extract_after(query, "inurl: ")
+//Calculation of the query
+number = calculate(query)
 
 //Submit a query
 my_query.Submit(query)
 
-//Get the list of url results
-results = my_bro.SearchTheItems("iUh30")
+//Get the result of the calculus
+result = parsefloat(my_bro.SearchItem("cwos"))
 
-//Check that all the results have the argument "content" in their url
-check = find_in_list(content, results)
+//Check the validity
+check = (result == number)
 
 //Display of the result
 If check then 
-  display("All results have " + content + " in their url") 
+  display("Google is a good additioner") 
 else 
-  display("Some results don't have " + content + " in their url")
+  display("Google can't even do an addition...")
 end if
